@@ -1,17 +1,17 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
-import 'package:oruphones/features/home/business_logic/cubits/cubit/carouselscroll_cubit.dart';
+
+import 'package:oruphones/features/home/presentation/widgets/carousel_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/on_your_mind_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/textfield.dart';
 import 'dart:ui';
 
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:oruphones/features/home/presentation/widgets/top_brands_section.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.isLoggedIn});
@@ -24,17 +24,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(); // Key for Drawer
-
-  List<int> carouselItems = [
-    1,
-    2,
-    3,
-    4,
-    5
-  ];
-
-  int _currentIndex = 0;
-  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -193,64 +182,9 @@ class _HomeScreenState extends State<HomeScreen> {
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: ListView(padding: EdgeInsets.symmetric(vertical: 10), children: [
-              BlocBuilder<CarouselScrollCubit, CarouselScrollState>(
-                builder: (context, state) {
-                  return Stack(
-                    children: [
-                      CarouselSlider(
-                        carouselController: _controller,
-                        options: CarouselOptions(
-                          aspectRatio: 16 / 9,
-                          initialPage: 0,
-                          viewportFraction: 1,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration: Duration(milliseconds: 800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          scrollDirection: Axis.horizontal,
-                          onPageChanged: (index, reason) {
-                            _currentIndex = index;
-                            context.read<CarouselScrollCubit>().onUpdates();
-                          },
-                        ),
-                        items: carouselItems.map((i) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Image.asset(
-                                "lib/assets/images/banners/banner$i.png",
-                                width: MediaQuery.of(context).size.width - 32,
-                                fit: BoxFit.fitWidth,
-                              );
-                            },
-                          );
-                        }).toList(),
-                      ),
-                      Positioned.fill(
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: AnimatedSmoothIndicator(
-                            activeIndex: _currentIndex,
-                            count: carouselItems.length,
-                            effect: WormEffect(
-                              activeDotColor: LightColors.indicatorGrey,
-                              dotHeight: 8,
-                              dotWidth: 8,
-                              paintStyle: PaintingStyle.stroke,
-                              spacing: 6,
-                            ),
-                            onDotClicked: (index) {
-                              _controller.animateToPage(index);
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+              CarouselSection(),
               OnYourMindSection(),
+              TopBrandsSection(),
             ]),
           ),
         ),
