@@ -5,8 +5,10 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
+import 'package:oruphones/features/home/presentation/widgets/best_deals.dart';
 
 import 'package:oruphones/features/home/presentation/widgets/carousel_section.dart';
+import 'package:oruphones/features/home/presentation/widgets/drawer.dart';
 import 'package:oruphones/features/home/presentation/widgets/on_your_mind_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/textfield.dart';
 import 'dart:ui';
@@ -158,13 +160,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                             vertical: 4,
                                           ),
                                           child: Center(
-                                            child: Text(
-                                              chipCards[index]["title"],
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 11,
-                                                color: LightColors.black,
-                                                fontWeight: FontWeight.w500,
-                                              ),
+                                            child: Row(
+                                              children: [
+                                                chipCards[index]["new"] != null && chipCards[index]["new"]
+                                                    ? Padding(
+                                                        padding: const EdgeInsets.only(right: 10.0),
+                                                        child: Iconify(
+                                                          newLabel,
+                                                          size: 12,
+                                                        ),
+                                                      )
+                                                    : SizedBox.shrink(),
+                                                Text(
+                                                  chipCards[index]["title"],
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 11,
+                                                    color: LightColors.black,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -185,33 +200,12 @@ class _HomeScreenState extends State<HomeScreen> {
               CarouselSection(),
               OnYourMindSection(),
               TopBrandsSection(),
+              BestDeals(),
             ]),
           ),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Text(
-                "Menu",
-                style: TextStyle(color: LightColors.white, fontSize: 24),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
-              onTap: () => Navigator.pop(context),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Settings"),
-              onTap: () => Navigator.pop(context),
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerSection(),
     );
   }
 }

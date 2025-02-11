@@ -1,3 +1,5 @@
+import 'package:oruphones/assets/svgs/svg.dart';
+
 const options = [
   "Buy Used Phones",
   "Sell Used Phones",
@@ -46,4 +48,35 @@ List<Map<String, dynamic>> chipCards = [
   {
     "title": "Get the App",
   }
+];
+
+final List<Map<String, dynamic>> drawerOptions = [
+  {
+    "icon": howToBuy,
+    "text": "How to Buy"
+  },
+  {
+    "icon": howToSell,
+    "text": "How to Sell"
+  },
+  {
+    "icon": oruGuide,
+    "text": "Oru Guide",
+    "loggedInIcon": faqs,
+    "loggedInText": "FAQs",
+  },
+  {
+    "icon": aboutUs,
+    "text": "About Us"
+  },
+  {
+    "icon": privacyPolicy,
+    "text": "Privacy Policy"
+  },
+  {
+    "icon": faqs,
+    "text": "FAQs",
+    "loggedInIcon": returnPolicy,
+    "loggedInText": "Return Policy",
+  },
 ];
