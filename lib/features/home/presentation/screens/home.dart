@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(); // Key for Drawer
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      drawer: DrawerSection(),
+      drawer: DrawerSection(
+        isLoggedIn: widget.isLoggedIn,
+      ),
     );
   }
 }

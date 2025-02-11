@@ -5,7 +5,9 @@ import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 
 class DrawerSection extends StatelessWidget {
-  const DrawerSection({super.key});
+  const DrawerSection({super.key, required this.isLoggedIn});
+
+  final bool isLoggedIn;
 
   @override
   Widget build(BuildContext context) {
@@ -40,26 +42,28 @@ class DrawerSection extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: LightColors.blue,
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                      shadowColor: LightColors.blue,
-                    ),
-                    child: Text(
-                      'Login/SignUp',
-                      style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        color: LightColors.white,
-                        fontWeight: FontWeight.w500,
+                  if (!isLoggedIn) ...[
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: LightColors.blue,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                        shadowColor: LightColors.blue,
+                      ),
+                      child: Text(
+                        'Login/SignUp',
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          color: LightColors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -77,17 +81,18 @@ class DrawerSection extends StatelessWidget {
                       ),
                     ),
                   ),
-                  ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text(
-                      "Logout",
-                      style: GoogleFonts.montserrat(
-                        fontSize: 14,
-                        color: LightColors.black,
+                  if (isLoggedIn)
+                    ListTile(
+                      leading: Icon(Icons.logout),
+                      title: Text(
+                        "Logout",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          color: LightColors.black,
+                        ),
                       ),
+                      onTap: () {},
                     ),
-                    onTap: () {},
-                  ),
                 ],
               ),
             ),
@@ -112,10 +117,14 @@ class DrawerSection extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Iconify(drawerOptions[index]["icon"], size: 28, color: Colors.black),
+                              Iconify(
+                                isLoggedIn && drawerOptions[index]["loggedInIcon"] != null ? drawerOptions[index]["loggedInIcon"] : drawerOptions[index]["icon"],
+                                size: 28,
+                                color: Colors.black,
+                              ),
                               SizedBox(height: 6),
                               Text(
-                                drawerOptions[index]["text"],
+                                isLoggedIn && drawerOptions[index]["loggedInText"] != null ? drawerOptions[index]["loggedInText"] : drawerOptions[index]["text"],
                                 style: GoogleFonts.poppins(
                                   fontSize: 10,
                                   color: LightColors.black,
