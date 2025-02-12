@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
+import 'package:oruphones/features/auth/presentation/screens/login.dart';
 
 class DrawerSection extends StatelessWidget {
   const DrawerSection({super.key, required this.isLoggedIn});
@@ -44,7 +45,7 @@ class DrawerSection extends StatelessWidget {
                   ),
                   if (!isLoggedIn) ...[
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen())),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: LightColors.blue,
                         padding: EdgeInsets.symmetric(vertical: 10),

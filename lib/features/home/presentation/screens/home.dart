@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/constants/home_page_constants.dart';
+import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/features/home/presentation/widgets/best_deals.dart';
 
@@ -16,9 +17,10 @@ import 'dart:ui';
 import 'package:oruphones/features/home/presentation/widgets/top_brands_section.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.isLoggedIn});
+  const HomeScreen({super.key, required this.isLoggedIn, this.userModel});
 
   final bool isLoggedIn;
+  final UserModel? userModel;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

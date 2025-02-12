@@ -11,8 +11,10 @@ class LightColors {
   static final Color lightYellow = HexColor.fromHex("#F7C04A");
   static final Color grey = HexColor.fromHex("#E0E0E0");
   static final Color darkGrey = HexColor.fromHex("707070");
+  static final Color placeholder = HexColor.fromHex("CCCCCC");
   static final Color indicatorGrey = HexColor.fromHex("ABABAB");
-  static final Color blue = HexColor.fromHex("#3E468F");
+  static final Color blue = HexColor.fromHex("#3F468F");
+  static final Color red = HexColor.fromHex("#FF3B30");
 }
 
 class DarkColors {
@@ -26,8 +28,10 @@ class DarkColors {
   static final Color lightYellow = HexColor.fromHex("#F7C04A");
   static final Color grey = HexColor.fromHex("#E0E0E0");
   static final Color darkGrey = HexColor.fromHex("707070");
+  static final Color placeholder = HexColor.fromHex("CCCCCC");
   static final Color indicatorGrey = HexColor.fromHex("ABABAB");
-  static final Color blue = HexColor.fromHex("#3E468F");
+  static final Color blue = HexColor.fromHex("#3F468F");
+  static final Color red = HexColor.fromHex("#FF3B30");
 }
 
 extension HexColor on Color {

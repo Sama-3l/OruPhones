@@ -88,3 +88,8 @@ const aboutUs = '''<svg width="25" height="26" viewBox="0 0 25 26" fill="none" x
 <path d="M12.5 13V18" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 ''';
+
+const arrow = '''<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.5625 5.75L19.3125 12.5L12.5625 19.25M18.375 12.5H4.6875" stroke="white" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+''';

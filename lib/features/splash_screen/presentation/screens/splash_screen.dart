@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:oruphones/core/database/database_queries.dart';
@@ -35,8 +34,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     BackendRepo backendRepo = BackendRepo();
     final response = await backendRepo.callGetMethod("isLoggedIn");
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      print(data);
+      final data = response.data;
       auth = data['isLoggedIn'] as bool;
     }
   }

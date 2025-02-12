@@ -1,91 +1,114 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:oruphones/core/constants/api_constants.dart';
 
 class BackendRepo {
-  String domain = ApiConstants.baseUrl;
+  final String _domain = ApiConstants.baseUrl;
+  final _dio = Dio();
 
-  Future<http.Response> signInUser(String apiUrl) async {
+  Future<Response> signInUser(String apiUrl) async {
     try {
-      String url = domain + apiUrl;
+      String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json'
       };
-      http.Response response = await http.get(Uri.parse(url), headers: header);
+      Response response = await _dio.get(
+        url,
+        options: Options(headers: header),
+      );
       return response;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<http.Response> callUserGetMethod(String apiUrl, String token) async {
+  Future<Response> callUserGetMethod(String apiUrl, String token) async {
     try {
-      String url = domain + apiUrl;
+      String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
         'authorization': 'Bearer $token'
       };
 
-      http.Response response = await http.get(Uri.parse(url), headers: header);
+      Response response = await _dio.get(
+        url,
+        options: Options(headers: header),
+      );
       return response;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<http.Response> callPostMethod(String apiUrl, Map<String, dynamic> body) async {
+  Future<Response?> callPostMethod(String apiUrl, Map<String, dynamic> body) async {
     try {
-      String url = domain + apiUrl;
+      String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json'
       };
-
-      http.Response response = await http.post(Uri.parse(url), body: jsonEncode(body), headers: header);
+      Response response = await _dio.post(
+        url,
+        data: jsonEncode(body),
+        options: Options(headers: header),
+      );
       return response;
+    } on DioException catch (e) {
+      return e.response;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<http.Response> callGetMethod(String apiUrl) async {
+  Future<Response> callGetMethod(String apiUrl) async {
     try {
-      String url = domain + apiUrl;
+      String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
       };
 
-      http.Response response = await http.get(Uri.parse(url), headers: header);
+      Response response = await _dio.get(
+        url,
+        options: Options(headers: header),
+      );
       return response;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<http.Response> callUserPostMethod(String apiUrl, Map<String, dynamic> body, String token) async {
+  Future<Response> callUserPostMethod(String apiUrl, Map<String, dynamic> body, String token) async {
     try {
-      String url = domain + apiUrl;
-      Map<String, String> header = {
-        'Content-Type': 'application/json',
-        'authorization': 'Bearer $token'
-      };
-
-      http.Response response = await http.post(Uri.parse(url), body: jsonEncode(body), headers: header);
-      return response;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<http.Response> callUserPutMethod(String apiUrl, Map<String, dynamic> body, String token) async {
-    try {
-      String url = domain + apiUrl;
+      String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
         'authorization': 'Bearer $token'
       };
 
-      http.Response response = await http.put(Uri.parse(url), body: jsonEncode(body), headers: header);
+      Response response = await _dio.post(
+        url,
+        data: jsonEncode(body),
+        options: Options(headers: header),
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> callUserPutMethod(String apiUrl, Map<String, dynamic> body, String token) async {
+    try {
+      String url = _domain + apiUrl;
+      Map<String, String> header = {
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer $token'
+      };
+
+      Response response = await _dio.put(
+        url,
+        data: jsonEncode(body),
+        options: Options(headers: header),
+      );
       return response;
     } catch (e) {
       rethrow;
