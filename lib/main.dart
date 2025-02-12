@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/checkBoxCubit/check_box_cubit.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/otpUpdateCubit/otp_update_cubit.dart';
-import 'package:oruphones/features/auth/presentation/screens/change_name.dart';
 import 'package:oruphones/features/home/business_logic/cubits/cubit/carouselscroll_cubit.dart';
 import 'package:oruphones/features/splash_screen/presentation/screens/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          home: ChangeNameScreen(),
+          home: SplashScreen(),
         ));
   }
 }

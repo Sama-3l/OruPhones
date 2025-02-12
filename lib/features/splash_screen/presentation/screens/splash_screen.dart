@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:oruphones/core/database/database_queries.dart';
+import 'package:oruphones/core/database/models/user_model.dart';
+import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/home/presentation/screens/home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,12 +12,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   bool auth = false;
+  UserModel? user;
+  final func = Methods();
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    isLoggedIn();
+    func.isLoggedIn((auth, user) {
+      auth = auth;
+      user = user;
+    });
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Navigator.pushReplacement(
@@ -24,19 +30,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           MaterialPageRoute(
               builder: (context) => HomeScreen(
                     isLoggedIn: auth,
+                    userModel: user,
                   )),
         );
       }
     });
-  }
-
-  Future<void> isLoggedIn() async {
-    BackendRepo backendRepo = BackendRepo();
-    final response = await backendRepo.callGetMethod("isLoggedIn");
-    if (response.statusCode == 200) {
-      final data = response.data;
-      auth = data['isLoggedIn'] as bool;
-    }
   }
 
   @override

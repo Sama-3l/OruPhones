@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:oruphones/core/constants/api_constants.dart';
 
@@ -60,12 +59,17 @@ class BackendRepo {
     }
   }
 
-  Future<Response> callGetMethod(String apiUrl) async {
+  Future<Response> callGetMethod(String apiUrl, {String? cookie}) async {
     try {
       String url = _domain + apiUrl;
-      Map<String, String> header = {
-        'Content-Type': 'application/json',
-      };
+      Map<String, String> header = cookie == null
+          ? {
+              'Content-Type': 'application/json',
+            }
+          : {
+              'Content-Type': 'application/json',
+              'Cookie': cookie,
+            };
 
       Response response = await _dio.get(
         url,
@@ -82,7 +86,9 @@ class BackendRepo {
       String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
-        'authorization': 'Bearer $token'
+        "key": "X-Csrf-Token",
+        "value": token,
+        "type": "text",
       };
 
       Response response = await _dio.post(
@@ -101,7 +107,9 @@ class BackendRepo {
       String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
-        'authorization': 'Bearer $token'
+        "key": "X-Csrf-Token",
+        "value": token,
+        "type": "text",
       };
 
       Response response = await _dio.put(

@@ -6,6 +6,7 @@ import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
+import 'package:oruphones/features/auth/presentation/screens/login.dart';
 import 'package:oruphones/features/home/presentation/widgets/best_deals.dart';
 
 import 'package:oruphones/features/home/presentation/widgets/carousel_section.dart';
@@ -88,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen())),
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                   backgroundColor: LightColors.yellow,
