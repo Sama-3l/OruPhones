@@ -19,22 +19,24 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    func.isLoggedIn((auth, user) {
-      auth = auth;
-      user = user;
+    func.isLoggedIn((authData, userData) {
+      auth = authData;
+      user = userData;
     });
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                    isLoggedIn: auth,
-                    userModel: user,
-                  )),
-        );
-      }
-    });
+    _controller.addStatusListener((status) => listenerFunction(status));
+  }
+
+  void listenerFunction(AnimationStatus status) async {
+    if (status == AnimationStatus.completed) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomeScreen(
+                  isLoggedIn: auth,
+                  userModel: user,
+                )),
+      );
+    }
   }
 
   @override
