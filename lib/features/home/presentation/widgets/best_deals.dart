@@ -89,7 +89,7 @@ class _BestDealsState extends State<BestDeals> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 8.0,
-                  childAspectRatio: 0.6,
+                  mainAxisExtent: 330,
                 ),
                 itemCount: 10,
                 itemBuilder: (context, index) {
@@ -140,7 +140,7 @@ class _BestDealsState extends State<BestDeals> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 8.0,
-                  childAspectRatio: 0.6,
+                  mainAxisExtent: 330,
                 ),
                 itemCount: items.length,
                 itemBuilder: (context, index) {

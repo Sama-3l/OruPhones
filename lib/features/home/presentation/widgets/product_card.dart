@@ -201,7 +201,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     if (product.discountedPrice != 0) ...[
                       Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 2.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: Text(
                           "₹ ${product.originalPrice}",
                           style: GoogleFonts.poppins(
@@ -212,13 +212,15 @@ class ProductCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        "(${product.discountPercentage.round()}%)",
-                        style: GoogleFonts.poppins(
-                          fontSize: 10,
-                          color: LightColors.red,
-                          letterSpacing: -0.5,
-                          fontWeight: FontWeight.w500,
+                      Expanded(
+                        child: Text(
+                          "(${product.discountPercentage.round()}%)",
+                          style: GoogleFonts.poppins(
+                            fontSize: 8,
+                            color: LightColors.red,
+                            letterSpacing: -0.5,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ]
