@@ -46,7 +46,10 @@ class FaqsSection extends StatelessWidget {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: items.length,
-              itemBuilder: (context, index) => FaqPanel(question: items[index]["question"], answer: items[index]["answer"]),
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: FaqPanel(question: items[index]["question"], answer: items[index]["answer"]),
+              ),
             );
           }
         },
