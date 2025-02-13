@@ -76,6 +76,7 @@ flutter:
     - lib/assets/images/options/
     - lib/assets/images/banners/
     - lib/assets/images/brands/
+    - lib/assets/images/socials/
     - lib/assets/images/
     - .env
 

@@ -12,11 +12,13 @@ class LightColors {
   static final Color lightYellow = HexColor.fromHex("#F7C04A");
   static final Color grey = HexColor.fromHex("#E0E0E0");
   static final Color darkGrey = HexColor.fromHex("707070");
+  static final Color blackGrey = HexColor.fromHex("363636");
   static final Color productCardBorder = HexColor.fromHex("CFCFCF");
   static final Color faqBorder = HexColor.fromHex("E8E8E8");
   static final Color productCardShadow = HexColor.fromHex("8C8C8C");
   static final Color placeholder = HexColor.fromHex("CCCCCC");
   static final Color glassmorphicGrey = HexColor.fromHex("4C4C4C");
+  static final Color shadowColor = HexColor.fromHex("787878");
   static final Color secondoryInfoGrey = HexColor.fromHex("6D6D6D");
   static final Color indicatorGrey = HexColor.fromHex("ABABAB");
   static final Color frostedText = HexColor.fromHex("DBDBDB");
@@ -37,11 +39,13 @@ class DarkColors {
   static final Color lightYellow = HexColor.fromHex("#F7C04A");
   static final Color grey = HexColor.fromHex("#E0E0E0");
   static final Color darkGrey = HexColor.fromHex("707070");
+  static final Color blackGrey = HexColor.fromHex("363636");
   static final Color productCardBorder = HexColor.fromHex("CFCFCF");
   static final Color productCardShadow = HexColor.fromHex("8C8C8C");
   static final Color faqBorder = HexColor.fromHex("E8E8E8");
   static final Color placeholder = HexColor.fromHex("CCCCCC");
   static final Color glassmorphicGrey = HexColor.fromHex("4C4C4C");
+  static final Color shadowColor = HexColor.fromHex("787878");
   static final Color secondoryInfoGrey = HexColor.fromHex("6D6D6D");
   static final Color indicatorGrey = HexColor.fromHex("ABABAB");
   static final Color frostedText = HexColor.fromHex("DBDBDB");

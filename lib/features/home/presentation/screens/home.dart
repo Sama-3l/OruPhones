@@ -16,6 +16,7 @@ import 'package:oruphones/features/home/presentation/widgets/drawer.dart';
 import 'package:oruphones/features/home/presentation/widgets/faqs.dart';
 import 'package:oruphones/features/home/presentation/widgets/get_notified.dart';
 import 'package:oruphones/features/home/presentation/widgets/on_your_mind_section.dart';
+import 'package:oruphones/features/home/presentation/widgets/socials_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/sort_filter_button.dart';
 import 'package:oruphones/features/home/presentation/widgets/textfield.dart';
 import 'dart:ui';
@@ -278,9 +279,17 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 24,
             ),
             GetNotifiedSection(),
-            Image.asset(
-              'lib/assets/images/downloadApp.png',
-              width: double.infinity,
+            Container(
+              color: LightColors.blackGrey,
+              child: Column(
+                children: [
+                  Image.asset(
+                    'lib/assets/images/downloadApp.png',
+                    width: double.infinity,
+                  ),
+                  SocialsSection(),
+                ],
+              ),
             )
           ]),
         ),
