@@ -1,8 +1,26 @@
-# State Management: BLoC
+# OruPhones
 
 This project is built using the **BLoC (Business Logic Component)** state management pattern, ensuring a clean separation of concerns between UI, business logic, and data layers. This architecture helps maintain a scalable and testable codebase.
 
 ---
+
+## How to Run the App
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/Sama-3l/OruPhones.git
+
+2. Install the required dependencies:
+   ```bash
+   flutter pub get
+
+3. Run the app:
+   ```bash
+   flutter run
+
+## YouTube Demo
+
+**Watch the project demo on [YouTube](https://youtu.be/UYxNnvS6pYg).**
 
 ## Project Structure
 
@@ -60,20 +78,6 @@ Example flow for a feature:
 3. The updated state is emitted, and the UI rebuilds with the new data.
 
 ---
-
-## How to Run the App
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/Sama-3l/OruPhones.git
-
-2. Install the required dependencies:
-   ```bash
-   flutter pub get
-
-3. Run the app:
-   ```bash
-   flutter run
 
 ### Directory Structure
 

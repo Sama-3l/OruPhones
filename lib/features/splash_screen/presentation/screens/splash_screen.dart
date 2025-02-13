@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   void getPermissions() async {
-    await func.requestLocationPermission();
+    await func.determinePosition();
   }
 
   void listenerFunction(AnimationStatus status) async {
