@@ -7,7 +7,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
-import 'package:oruphones/features/home/business_logic/cubits/cubit/like_product_cubit.dart';
+import 'package:oruphones/features/home/business_logic/cubits/LikeProduct/like_product_cubit.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});

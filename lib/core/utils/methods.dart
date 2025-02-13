@@ -122,4 +122,13 @@ class Methods {
     List<ProductModel> products = (response.data["data"]["data"] as List).map((e) => ProductModel.fromJson(e)).toList();
     return products;
   }
+
+  Future<List<Map<String, dynamic>>> fetchFaqs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cookie = prefs.getString('cookie') ?? "";
+    // print()
+    final response = await backendRepo.callGetMethod('faq', cookie: cookie);
+    List<Map<String, dynamic>> products = List<Map<String, dynamic>>.from(response.data["FAQs"]);
+    return products;
+  }
 }

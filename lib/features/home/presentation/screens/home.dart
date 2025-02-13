@@ -11,6 +11,7 @@ import 'package:oruphones/features/home/presentation/widgets/best_deals.dart';
 
 import 'package:oruphones/features/home/presentation/widgets/carousel_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/drawer.dart';
+import 'package:oruphones/features/home/presentation/widgets/faqs.dart';
 import 'package:oruphones/features/home/presentation/widgets/on_your_mind_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/textfield.dart';
 import 'dart:ui';
@@ -204,6 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
               OnYourMindSection(),
               TopBrandsSection(),
               BestDeals(),
+              FaqsSection(),
             ]),
           ),
         ),
