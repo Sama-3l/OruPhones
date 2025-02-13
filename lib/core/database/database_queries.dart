@@ -22,12 +22,13 @@ class BackendRepo {
     }
   }
 
-  Future<Response> callUserGetMethod(String apiUrl, String token) async {
+  Future<Response> callUserGetMethod(String apiUrl, String token, String cookie) async {
     try {
       String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
-        'authorization': 'Bearer $token'
+        "X-Csrf-Token": token,
+        'Cookie': cookie,
       };
 
       Response response = await _dio.get(
@@ -81,16 +82,14 @@ class BackendRepo {
     }
   }
 
-  Future<Response> callUserPostMethod(String apiUrl, Map<String, dynamic> body, String token) async {
+  Future<Response> callUserPostMethod(String apiUrl, Map<String, dynamic> body, String token, String cookie) async {
     try {
       String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
-        "key": "X-Csrf-Token",
-        "value": token,
-        "type": "text",
+        "X-Csrf-Token": token,
+        'Cookie': cookie,
       };
-
       Response response = await _dio.post(
         url,
         data: jsonEncode(body),
@@ -102,14 +101,13 @@ class BackendRepo {
     }
   }
 
-  Future<Response> callUserPutMethod(String apiUrl, Map<String, dynamic> body, String token) async {
+  Future<Response> callUserPutMethod(String apiUrl, Map<String, dynamic> body, String token, String cookie) async {
     try {
       String url = _domain + apiUrl;
       Map<String, String> header = {
         'Content-Type': 'application/json',
-        "key": "X-Csrf-Token",
-        "value": token,
-        "type": "text",
+        "X-Csrf-Token": token,
+        'Cookie': cookie,
       };
 
       Response response = await _dio.put(

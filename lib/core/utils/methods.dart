@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oruphones/core/constants/enums.dart';
 import 'package:oruphones/core/database/database_queries.dart';
+import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/features/auth/presentation/screens/otp_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +32,7 @@ class Methods {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final cookie = prefs.getString('cookie');
     final response = await backendRepo.callGetMethod("isLoggedIn", cookie: cookie);
+    print(response);
     if (response.statusCode == 200) {
       final data = response.data;
       if (data['isLoggedIn'] as bool) {
@@ -78,11 +80,46 @@ class Methods {
     }
   }
 
-  // void updateUserName(String name) async {
-  //   final response = await backendRepo.callUserPostMethod('login/otpValidate', {
-  //     "countryCode": 91,
-  //     "mobileNumber": number,
-  //     "otp": otp,
-  //   });
-  // }
+  void updateUserName(String name, UserModel user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('csrfToken') ?? "";
+    final cookie = prefs.getString('cookie') ?? "";
+    print(token);
+    print(cookie);
+    final response = await backendRepo.callUserPostMethod(
+        'update',
+        {
+          "countryCode": 91,
+          "username": name,
+        },
+        token,
+        cookie);
+    if (response.statusCode != 200) {
+    } else {
+      user.userName = name;
+    }
+  }
+
+  Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('csrfToken') ?? "";
+    final cookie = prefs.getString('cookie') ?? "";
+    await backendRepo.callUserGetMethod('logout', token, cookie);
+  }
+
+  Future<List<ProductModel>> fetchProducts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('csrfToken') ?? "";
+    final cookie = prefs.getString('cookie') ?? "";
+    // print()
+    final response = await backendRepo.callUserPostMethod(
+        'filter',
+        {
+          "filter": {}
+        },
+        token,
+        cookie);
+    List<ProductModel> products = (response.data["data"]["data"] as List).map((e) => ProductModel.fromJson(e)).toList();
+    return products;
+  }
 }

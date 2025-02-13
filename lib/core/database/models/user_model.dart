@@ -2,18 +2,18 @@
 import 'package:intl/intl.dart';
 
 class UserModel {
-  final String userName;
-  final String email;
-  final String profilePicPath;
-  final String city;
-  final String state;
-  final String mobileNumber;
-  final bool isAccountExpired;
-  final DateTime createdDate;
-  final List favListings;
-  final List userListings;
-  final String userType;
-  final bool waOptIn;
+  String userName;
+  String email;
+  String profilePicPath;
+  String city;
+  String state;
+  String mobileNumber;
+  bool isAccountExpired;
+  DateTime createdDate;
+  List favListings;
+  List userListings;
+  String userType;
+  bool waOptIn;
 
   UserModel({
     required this.userName,

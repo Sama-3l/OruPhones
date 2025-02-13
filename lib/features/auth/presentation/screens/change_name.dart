@@ -88,12 +88,15 @@ class ChangeNameScreen extends StatelessWidget {
                   LoginInputField(
                     padding: EdgeInsets.only(top: 4),
                     textEditingController: controller,
+                    hintText: "Name",
+                    textInputType: TextInputType.text,
+                    maxLength: 50,
                   ),
                 ],
               ),
             ),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () => func.updateUserName(controller.value.text, user!),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: LightColors.blue,
                     padding: EdgeInsets.symmetric(vertical: 12),

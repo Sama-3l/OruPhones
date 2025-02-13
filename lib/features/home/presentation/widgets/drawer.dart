@@ -6,13 +6,15 @@ import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
+import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/auth/presentation/screens/login.dart';
 
 class DrawerSection extends StatelessWidget {
-  const DrawerSection({super.key, required this.isLoggedIn, this.user});
+  DrawerSection({super.key, required this.isLoggedIn, this.user});
 
   final bool isLoggedIn;
   final UserModel? user;
+  final Methods func = Methods();
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +149,9 @@ class DrawerSection extends StatelessWidget {
                           color: LightColors.black,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () async {
+                        await func.logout();
+                      },
                     ),
                   ),
               ],

@@ -10,12 +10,16 @@ class LoginInputField extends StatelessWidget {
     required this.padding,
     this.hintText = "Mobile Number",
     this.prefixIcon = false,
+    this.textInputType = TextInputType.number,
+    this.maxLength = 10,
   });
 
   final TextEditingController? textEditingController;
   final EdgeInsets padding;
   final String hintText;
   final bool prefixIcon;
+  final TextInputType textInputType;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class LoginInputField extends StatelessWidget {
           letterSpacing: -0.41,
         ),
         keyboardType: TextInputType.number,
-        maxLength: 10,
+        maxLength: maxLength,
         maxLengthEnforcement: MaxLengthEnforcement.truncateAfterCompositionEnds,
         decoration: InputDecoration(
           hintText: hintText,

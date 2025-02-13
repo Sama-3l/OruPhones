@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/utils/methods.dart';
+import 'package:oruphones/features/auth/presentation/screens/change_name.dart';
 import 'package:oruphones/features/home/presentation/screens/home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,14 +29,24 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   void listenerFunction(AnimationStatus status) async {
     if (status == AnimationStatus.completed) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomeScreen(
-                  isLoggedIn: auth,
-                  userModel: user,
-                )),
-      );
+      if (auth && user!.userName == "") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ChangeNameScreen(
+                    user: user,
+                  )),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(
+                    isLoggedIn: auth,
+                    userModel: user,
+                  )),
+        );
+      }
     }
   }
 
