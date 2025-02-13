@@ -6,6 +6,7 @@ import 'package:oruphones/features/auth/business_logic/cubits/otpUpdateCubit/otp
 import 'package:oruphones/features/home/business_logic/cubits/CarouselScrollCubit/carouselscroll_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/LikeProduct/like_product_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/ExpandFaqCubit/expand_faq_cubit.dart';
+import 'package:oruphones/features/home/business_logic/cubits/cubit/stick_sort_and_filter_cubit.dart';
 import 'package:oruphones/features/splash_screen/presentation/screens/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => LikeProductCubit()),
           BlocProvider(create: (context) => ExpandFaqCubit()),
           BlocProvider(create: (context) => BottomSheetPageCubit()),
+          BlocProvider(create: (context) => StickSortAndFilterCubit()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -36,3 +38,5 @@ class MyApp extends StatelessWidget {
         ));
   }
 }
+
+class StickButtonsCubit {}

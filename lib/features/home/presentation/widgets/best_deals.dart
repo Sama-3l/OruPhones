@@ -10,7 +10,10 @@ import 'package:oruphones/features/home/presentation/widgets/product_card.dart';
 import 'package:oruphones/features/home/presentation/widgets/sort_filter_button.dart';
 
 class BestDeals extends StatefulWidget {
-  const BestDeals({super.key, required this.userModel});
+  const BestDeals({
+    super.key,
+    required this.userModel,
+  });
 
   final UserModel? userModel;
 
@@ -63,7 +66,7 @@ class _BestDealsState extends State<BestDeals> {
         ),
         SizedBox(
           height: 36,
-          child: ListView(scrollDirection: Axis.horizontal, children: [
+          child: Row(children: [
             SortFilterButton(
               prefixIcon: sort,
               title: "Sort",

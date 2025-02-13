@@ -40,7 +40,7 @@ class TopBrandsSection extends StatelessWidget {
           child: FutureBuilder(
               future: func.fetchBrands(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) return CircularProgressIndicator();
+                if (snapshot.connectionState == ConnectionState.waiting) return Center(child: CircularProgressIndicator());
                 final brands = snapshot.data!;
                 return SizedBox(
                   height: 72,

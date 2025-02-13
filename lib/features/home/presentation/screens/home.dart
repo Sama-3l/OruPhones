@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
@@ -7,12 +8,14 @@ import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/features/auth/presentation/screens/login.dart';
+import 'package:oruphones/features/home/business_logic/cubits/cubit/stick_sort_and_filter_cubit.dart';
 import 'package:oruphones/features/home/presentation/widgets/best_deals.dart';
 
 import 'package:oruphones/features/home/presentation/widgets/carousel_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/drawer.dart';
 import 'package:oruphones/features/home/presentation/widgets/faqs.dart';
 import 'package:oruphones/features/home/presentation/widgets/on_your_mind_section.dart';
+import 'package:oruphones/features/home/presentation/widgets/sort_filter_button.dart';
 import 'package:oruphones/features/home/presentation/widgets/textfield.dart';
 import 'dart:ui';
 
@@ -30,6 +33,30 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _targetKey = GlobalKey();
+  bool _isPastElement = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_checkScrollPosition);
+  }
+
+  void _checkScrollPosition() {
+    // Get the RenderBox of the target widget
+    RenderBox? targetBox = _targetKey.currentContext?.findRenderObject() as RenderBox?;
+    if (targetBox != null) {
+      double widgetPosition = targetBox.localToGlobal(Offset.zero).dy;
+      if (widgetPosition < 0 && !_isPastElement) {
+        _isPastElement = true;
+        context.read<StickSortAndFilterCubit>().onStick(_isPastElement);
+      } else if (widgetPosition >= 0 && _isPastElement) {
+        _isPastElement = false;
+        context.read<StickSortAndFilterCubit>().onStick(_isPastElement);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: LightColors.white,
       body: SafeArea(
         child: NestedScrollView(
+          controller: _scrollController,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
@@ -149,53 +177,76 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: EdgeInsets.symmetric(horizontal: 16),
                             ),
                           ),
-                          SizedBox(
-                            height: 36,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: chipCards.length,
-                                itemBuilder: (context, index) => Padding(
-                                      padding: EdgeInsets.only(
-                                        left: index != 0 ? 4 : 16,
-                                        right: index != chipCards.length - 1 ? 4 : 16,
+                          BlocBuilder<StickSortAndFilterCubit, StickSortAndFilterState>(
+                            builder: (context, state) {
+                              if (state is StickButtonsState && state.stickButtons) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 16.0),
+                                  child: SizedBox(
+                                    height: 36,
+                                    child: Row(children: [
+                                      SortFilterButton(
+                                        prefixIcon: sort,
+                                        title: "Sort",
                                       ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: LightColors.white,
-                                          border: Border.all(color: LightColors.white2),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                            vertical: 4,
-                                          ),
-                                          child: Center(
-                                            child: Row(
-                                              children: [
-                                                chipCards[index]["new"] != null && chipCards[index]["new"]
-                                                    ? Padding(
-                                                        padding: const EdgeInsets.only(right: 10.0),
-                                                        child: Iconify(
-                                                          newLabel,
-                                                          size: 12,
+                                      SortFilterButton(
+                                        prefixIcon: filter,
+                                        title: "Filter",
+                                      ),
+                                    ]),
+                                  ),
+                                );
+                              } else {
+                                return SizedBox(
+                                  height: 36,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: chipCards.length,
+                                      itemBuilder: (context, index) => Padding(
+                                            padding: EdgeInsets.only(
+                                              left: index != 0 ? 4 : 16,
+                                              right: index != chipCards.length - 1 ? 4 : 16,
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: LightColors.white,
+                                                border: Border.all(color: LightColors.white2),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 12,
+                                                  vertical: 4,
+                                                ),
+                                                child: Center(
+                                                  child: Row(
+                                                    children: [
+                                                      chipCards[index]["new"] != null && chipCards[index]["new"]
+                                                          ? Padding(
+                                                              padding: const EdgeInsets.only(right: 10.0),
+                                                              child: Iconify(
+                                                                newLabel,
+                                                                size: 12,
+                                                              ),
+                                                            )
+                                                          : SizedBox.shrink(),
+                                                      Text(
+                                                        chipCards[index]["title"],
+                                                        style: GoogleFonts.poppins(
+                                                          fontSize: 11,
+                                                          color: LightColors.black,
+                                                          fontWeight: FontWeight.w500,
                                                         ),
-                                                      )
-                                                    : SizedBox.shrink(),
-                                                Text(
-                                                  chipCards[index]["title"],
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 11,
-                                                    color: LightColors.black,
-                                                    fontWeight: FontWeight.w500,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                    )),
+                                          )),
+                                );
+                              }
+                            },
                           )
                         ],
                       ),
@@ -207,10 +258,12 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ListView(padding: EdgeInsets.symmetric(vertical: 10), children: [
+            child: ListView(controller: _scrollController, padding: EdgeInsets.symmetric(vertical: 10), children: [
               CarouselSection(),
               OnYourMindSection(),
-              TopBrandsSection(),
+              TopBrandsSection(
+                key: _targetKey,
+              ),
               BestDeals(
                 userModel: widget.userModel,
               ),
