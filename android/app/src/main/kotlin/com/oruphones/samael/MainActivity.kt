@@ -1,4 +1,4 @@
-package com.example.oruphones
+package com.oruphones.samael
 
 import io.flutter.embedding.android.FlutterActivity
 

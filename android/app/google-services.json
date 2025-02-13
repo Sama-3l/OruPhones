@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "111384287314",
+    "project_id": "mmart-6dbfa",
+    "storage_bucket": "mmart-6dbfa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111384287314:android:bde5bfe37ccf5f0b49278b",
+        "android_client_info": {
+          "package_name": "com.oruphones.samael"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111384287314-nosqur1d31iekgj8rv0mpjksfkrruq4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjPRKvstPKwHETHL1lR15QTEygc_uzTqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111384287314-nosqur1d31iekgj8rv0mpjksfkrruq4u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "111384287314-r3tn6mq7es7v92ss1oklk6crutcuask1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samael.mmart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

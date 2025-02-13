@@ -24,7 +24,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       auth = authData;
       user = userData;
     });
+    getPermissions();
     _controller.addStatusListener((status) => listenerFunction(status));
+  }
+
+  void getPermissions() async {
+    await func.requestLocationPermission();
   }
 
   void listenerFunction(AnimationStatus status) async {

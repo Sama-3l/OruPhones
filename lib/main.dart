@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/checkBoxCubit/check_box_cubit.dart';
@@ -9,9 +10,19 @@ import 'package:oruphones/features/home/business_logic/cubits/ExpandFaqCubit/exp
 import 'package:oruphones/features/home/business_logic/cubits/cubit/stick_sort_and_filter_cubit.dart';
 import 'package:oruphones/features/splash_screen/presentation/screens/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:oruphones/firebase_options.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
   runApp(const MyApp());
 }
 
@@ -38,5 +49,3 @@ class MyApp extends StatelessWidget {
         ));
   }
 }
-
-class StickButtonsCubit {}
