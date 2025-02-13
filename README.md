@@ -1,4 +1,4 @@
-# Flutter Project using BLoC State Management
+# State Management: BLoC
 
 This project is built using the **BLoC (Business Logic Component)** state management pattern, ensuring a clean separation of concerns between UI, business logic, and data layers. This architecture helps maintain a scalable and testable codebase.
 

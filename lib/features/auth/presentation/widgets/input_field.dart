@@ -45,7 +45,7 @@ class LoginInputField extends StatelessWidget {
               color: LightColors.black,
               letterSpacing: -0.41,
             ),
-            keyboardType: TextInputType.number,
+            keyboardType: textInputType,
             maxLength: maxLength,
             maxLengthEnforcement: MaxLengthEnforcement.truncateAfterCompositionEnds,
             decoration: InputDecoration(
