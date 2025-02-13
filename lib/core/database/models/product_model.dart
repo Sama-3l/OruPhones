@@ -29,6 +29,7 @@ class ProductModel {
   final LocationModel location;
   final int originalPrice;
   final int discountedPrice;
+  bool liked;
 
   ProductModel({
     required this.id,
@@ -58,6 +59,7 @@ class ProductModel {
     required this.location,
     required this.originalPrice,
     required this.discountedPrice,
+    this.liked = false,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {

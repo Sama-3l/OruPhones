@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
-import 'package:oruphones/features/home/business_logic/cubits/cubit/carouselscroll_cubit.dart';
+import 'package:oruphones/features/home/business_logic/cubits/CarouselScrollCubit/carouselscroll_cubit.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CarouselSection extends StatelessWidget {

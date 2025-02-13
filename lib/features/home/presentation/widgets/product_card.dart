@@ -1,11 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
+import 'package:oruphones/features/home/business_logic/cubits/cubit/like_product_cubit.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
@@ -44,7 +46,6 @@ class ProductCard extends StatelessWidget {
                 width: double.infinity,
                 child: Stack(
                   children: [
-                    // Image
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8),
@@ -60,7 +61,6 @@ class ProductCard extends StatelessWidget {
                         placeholderFit: BoxFit.cover,
                       ),
                     ),
-
                     if (product.openForNegotiation)
                       Positioned(
                         bottom: 0,
@@ -89,30 +89,30 @@ class ProductCard extends StatelessWidget {
                           ),
                         ),
                       ),
-
-                    // Heart Icon at the top right
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: GestureDetector(
-                        onTap: () {
-                          // Handle heart tap
-                        },
-                        child: Icon(
-                          Icons.favorite_border, // Use Icons.favorite for filled heart
-                          color: Colors.white,
-                          size: 28,
-                        ),
-                      ),
+                    BlocBuilder<LikeProductCubit, LikeProductState>(
+                      builder: (context, state) {
+                        return Positioned(
+                          top: 8,
+                          right: 8,
+                          child: GestureDetector(
+                            onTap: () {
+                              product.liked = !product.liked;
+                              context.read<LikeProductCubit>().onPressed(product.liked);
+                            },
+                            child: Icon(
+                              product.liked ? Icons.favorite : Icons.favorite_border,
+                              color: product.liked ? LightColors.red : LightColors.white,
+                              size: 28,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-
                     if (product.verified)
                       Positioned(
                         top: 8,
                         child: GestureDetector(
-                          onTap: () {
-                            // Handle SVG icon tap
-                          },
+                          onTap: () {},
                           child: Iconify(
                             oruVerified,
                             size: 32,
