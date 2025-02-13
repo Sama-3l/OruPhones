@@ -89,22 +89,29 @@ class _HomeScreenState extends State<HomeScreen> {
                               size: 20,
                             ),
                           ),
-                          TextButton(
-                              onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen())),
-                              style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                  backgroundColor: LightColors.yellow,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4),
+                          widget.isLoggedIn
+                              ? IconButton(
+                                  onPressed: () {},
+                                  iconSize: 24,
+                                  icon: Icon(
+                                    Icons.notifications_outlined,
+                                  ))
+                              : TextButton(
+                                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen())),
+                                  style: ElevatedButton.styleFrom(
+                                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                      backgroundColor: LightColors.yellow,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4),
+                                      )),
+                                  child: Text(
+                                    "Login",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      color: LightColors.black,
+                                    ),
                                   )),
-                              child: Text(
-                                "Login",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                  color: LightColors.black,
-                                ),
-                              )),
                         ],
                       ),
                     ],

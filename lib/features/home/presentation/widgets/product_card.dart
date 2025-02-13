@@ -51,15 +51,22 @@ class ProductCard extends StatelessWidget {
                         topLeft: Radius.circular(8),
                         topRight: Radius.circular(8),
                       ),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'lib/assets/images/sampleProduct.png',
-                        image: product.defaultImage,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: 200,
-                        fadeInDuration: const Duration(milliseconds: 500),
-                        placeholderFit: BoxFit.cover,
-                      ),
+                      child: product.defaultImage == ""
+                          ? Image.asset(
+                              'lib/assets/images/sampleProduct.png',
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: 200,
+                            )
+                          : FadeInImage.assetNetwork(
+                              placeholder: 'lib/assets/images/sampleProduct.png',
+                              image: product.defaultImage,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: 200,
+                              fadeInDuration: const Duration(milliseconds: 500),
+                              placeholderFit: BoxFit.cover,
+                            ),
                     ),
                     if (product.openForNegotiation)
                       Positioned(

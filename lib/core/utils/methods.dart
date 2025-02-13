@@ -4,6 +4,7 @@ import 'package:oruphones/core/database/database_queries.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/features/auth/presentation/screens/otp_screen.dart';
+import 'package:oruphones/features/home/presentation/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Methods {
@@ -80,7 +81,7 @@ class Methods {
     }
   }
 
-  void updateUserName(String name, UserModel user) async {
+  void updateUserName(BuildContext context, String name, UserModel user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('csrfToken') ?? "";
     final cookie = prefs.getString('cookie') ?? "";
@@ -90,21 +91,28 @@ class Methods {
         'update',
         {
           "countryCode": 91,
-          "username": name,
+          "userName": name,
         },
         token,
         cookie);
-    if (response.statusCode != 200) {
-    } else {
+    if (response.statusCode == 200) {
       user.userName = name;
-    }
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => HomeScreen(
+                isLoggedIn: true,
+                userModel: user,
+              )));
+    } else {}
   }
 
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('csrfToken') ?? "";
     final cookie = prefs.getString('cookie') ?? "";
-    await backendRepo.callUserGetMethod('logout', token, cookie);
+    final response = await backendRepo.callUserGetMethod('logout', token, cookie);
+    if (response.statusCode == 200) {
+      prefs.clear();
+    }
   }
 
   Future<List<ProductModel>> fetchProducts() async {

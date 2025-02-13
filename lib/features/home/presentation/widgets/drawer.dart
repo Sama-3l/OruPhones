@@ -8,6 +8,7 @@ import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/auth/presentation/screens/login.dart';
+import 'package:oruphones/features/splash_screen/presentation/screens/splash_screen.dart';
 
 class DrawerSection extends StatelessWidget {
   DrawerSection({super.key, required this.isLoggedIn, this.user});
@@ -151,6 +152,8 @@ class DrawerSection extends StatelessWidget {
                       ),
                       onTap: () async {
                         await func.logout();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SplashScreen()));
                       },
                     ),
                   ),

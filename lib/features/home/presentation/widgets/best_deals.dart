@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
+import 'package:oruphones/core/database/models/location_model.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/core/utils/methods.dart';
@@ -74,11 +75,54 @@ class _BestDealsState extends State<BestDeals> {
           future: func.fetchProducts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator()); // Loading indicator
+              return GridView.builder(
+                padding: EdgeInsets.only(top: 24),
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 8.0,
+                  childAspectRatio: 0.55,
+                ),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                      product: ProductModel(
+                    id: "",
+                    deviceCondition: "New",
+                    listedBy: "",
+                    deviceStorage: "",
+                    images: [],
+                    defaultImage: "",
+                    listingState: "",
+                    listingLocation: "",
+                    listingLocality: "",
+                    listingPrice: "",
+                    make: "",
+                    marketingName: "",
+                    openForNegotiation: true,
+                    discountPercentage: 0,
+                    verified: true,
+                    listingId: "",
+                    status: "",
+                    verifiedDate: "",
+                    listingDate: "",
+                    deviceRam: "",
+                    warranty: "",
+                    imagePath: "",
+                    createdAt: DateTime.now(),
+                    updatedAt: DateTime.now(),
+                    location: LocationModel(id: "", type: "Point", coordinates: []),
+                    originalPrice: 0,
+                    discountedPrice: 0,
+                  ));
+                },
+              );
             } else if (snapshot.hasError) {
-              return Center(child: Text("Error: ${snapshot.error}")); // Error message
+              return Center(child: Text("Error: ${snapshot.error}"));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text("No data found")); // No data message
+              return Center(child: Text("No data found"));
             } else {
               final items = snapshot.data!;
               return GridView.builder(
@@ -86,7 +130,7 @@ class _BestDealsState extends State<BestDeals> {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // 2 columns
+                  crossAxisCount: 2,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 8.0,
                   childAspectRatio: 0.55,

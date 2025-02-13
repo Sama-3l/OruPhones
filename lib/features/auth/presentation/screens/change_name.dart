@@ -96,7 +96,7 @@ class ChangeNameScreen extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-                onPressed: () => func.updateUserName(controller.value.text, user!),
+                onPressed: () => func.updateUserName(context, controller.value.text, user!),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: LightColors.blue,
                     padding: EdgeInsets.symmetric(vertical: 12),
