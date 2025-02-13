@@ -128,11 +128,10 @@ class Methods {
     }
   }
 
-  Future<List<ProductModel>> fetchProducts() async {
+  Future<List<ProductModel>> fetchProducts(UserModel? user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('csrfToken') ?? "";
     final cookie = prefs.getString('cookie') ?? "";
-    // print()
     final response = await backendRepo.callUserPostMethod(
         'filter',
         {
@@ -141,13 +140,25 @@ class Methods {
         token,
         cookie);
     List<ProductModel> products = (response.data["data"]["data"] as List).map((e) => ProductModel.fromJson(e)).toList();
+    if (user != null) {
+      for (var product in products) {
+        product.liked = user.favListings.contains(product.listingId);
+      }
+    }
     return products;
+  }
+
+  Future<List<String>> fetchBrands() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cookie = prefs.getString('cookie') ?? "";
+    final response = await backendRepo.callGetMethod('makeWithImages', cookie: cookie);
+    List<String> brands = (response.data["dataObject"] as List).map((e) => e["imagePath"] as String).toList();
+    return brands;
   }
 
   Future<List<Map<String, dynamic>>> fetchFaqs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final cookie = prefs.getString('cookie') ?? "";
-    // print()
     final response = await backendRepo.callGetMethod('faq', cookie: cookie);
     List<Map<String, dynamic>> products = List<Map<String, dynamic>>.from(response.data["FAQs"]);
     return products;
@@ -164,5 +175,20 @@ class Methods {
       backgroundColor: Colors.white,
       useSafeArea: true,
     );
+  }
+
+  void likeProduct(ProductModel product) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('csrfToken') ?? "";
+    final cookie = prefs.getString('cookie') ?? "";
+    print(product.liked);
+    await backendRepo.callUserPostMethod(
+        'favs',
+        {
+          "listingId": product.listingId,
+          "isFav": product.liked,
+        },
+        token,
+        cookie);
   }
 }

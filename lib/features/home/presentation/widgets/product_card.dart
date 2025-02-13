@@ -6,15 +6,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
+import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/home/business_logic/cubits/LikeProduct/like_product_cubit.dart';
 
 class ProductCard extends StatelessWidget {
-  ProductCard({super.key, required this.product});
+  ProductCard({super.key, required this.product, required this.userModel});
 
   final ProductModel product;
   final Methods func = Methods();
+  final UserModel? userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +107,13 @@ class ProductCard extends StatelessWidget {
                           right: 8,
                           child: GestureDetector(
                             onTap: () {
-                              product.liked = !product.liked;
-                              context.read<LikeProductCubit>().onPressed(product.liked);
-                              func.showLoginBottomSheet(context);
+                              if (userModel != null) {
+                                product.liked = !product.liked;
+                                func.likeProduct(product);
+                                context.read<LikeProductCubit>().onPressed(product.liked);
+                              } else {
+                                func.showLoginBottomSheet(context);
+                              }
                             },
                             child: Icon(
                               product.liked ? Icons.favorite : Icons.favorite_border,

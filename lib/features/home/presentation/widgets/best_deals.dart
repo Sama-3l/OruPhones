@@ -3,13 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/database/models/location_model.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
+import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/home/presentation/widgets/product_card.dart';
 import 'package:oruphones/features/home/presentation/widgets/sort_filter_button.dart';
 
 class BestDeals extends StatefulWidget {
-  const BestDeals({super.key});
+  const BestDeals({super.key, required this.userModel});
+
+  final UserModel? userModel;
 
   @override
   State<BestDeals> createState() => _BestDealsState();
@@ -72,7 +75,7 @@ class _BestDealsState extends State<BestDeals> {
           ]),
         ),
         FutureBuilder<List<ProductModel>>(
-          future: func.fetchProducts(),
+          future: func.fetchProducts(widget.userModel),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return GridView.builder(
@@ -83,40 +86,41 @@ class _BestDealsState extends State<BestDeals> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 8.0,
-                  childAspectRatio: 0.55,
+                  childAspectRatio: 0.6,
                 ),
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return ProductCard(
+                      userModel: widget.userModel,
                       product: ProductModel(
-                    id: "",
-                    deviceCondition: "New",
-                    listedBy: "",
-                    deviceStorage: "",
-                    images: [],
-                    defaultImage: "",
-                    listingState: "",
-                    listingLocation: "",
-                    listingLocality: "",
-                    listingPrice: "",
-                    make: "",
-                    marketingName: "",
-                    openForNegotiation: true,
-                    discountPercentage: 0,
-                    verified: true,
-                    listingId: "",
-                    status: "",
-                    verifiedDate: "",
-                    listingDate: "",
-                    deviceRam: "",
-                    warranty: "",
-                    imagePath: "",
-                    createdAt: DateTime.now(),
-                    updatedAt: DateTime.now(),
-                    location: LocationModel(id: "", type: "Point", coordinates: []),
-                    originalPrice: 0,
-                    discountedPrice: 0,
-                  ));
+                        id: "",
+                        deviceCondition: "New",
+                        listedBy: "",
+                        deviceStorage: "",
+                        images: [],
+                        defaultImage: "",
+                        listingState: "",
+                        listingLocation: "",
+                        listingLocality: "",
+                        listingPrice: "",
+                        make: "",
+                        marketingName: "",
+                        openForNegotiation: true,
+                        discountPercentage: 0,
+                        verified: true,
+                        listingId: "",
+                        status: "",
+                        verifiedDate: "",
+                        listingDate: "",
+                        deviceRam: "",
+                        warranty: "",
+                        imagePath: "",
+                        createdAt: DateTime.now(),
+                        updatedAt: DateTime.now(),
+                        location: LocationModel(id: "", type: "Point", coordinates: []),
+                        originalPrice: 0,
+                        discountedPrice: 0,
+                      ));
                 },
               );
             } else if (snapshot.hasError) {
@@ -133,11 +137,14 @@ class _BestDealsState extends State<BestDeals> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 8.0,
-                  childAspectRatio: 0.55,
+                  childAspectRatio: 0.6,
                 ),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
-                  return ProductCard(product: items[index]);
+                  return ProductCard(
+                    product: items[index],
+                    userModel: widget.userModel,
+                  );
                 },
               );
             }

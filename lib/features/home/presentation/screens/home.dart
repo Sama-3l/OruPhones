@@ -211,7 +211,9 @@ class _HomeScreenState extends State<HomeScreen> {
               CarouselSection(),
               OnYourMindSection(),
               TopBrandsSection(),
-              BestDeals(),
+              BestDeals(
+                userModel: widget.userModel,
+              ),
               FaqsSection(),
             ]),
           ),
