@@ -7,7 +7,7 @@ import 'package:oruphones/features/auth/business_logic/cubits/otpUpdateCubit/otp
 import 'package:oruphones/features/home/business_logic/cubits/CarouselScrollCubit/carouselscroll_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/LikeProduct/like_product_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/ExpandFaqCubit/expand_faq_cubit.dart';
-import 'package:oruphones/features/home/business_logic/cubits/cubit/stick_sort_and_filter_cubit.dart';
+import 'package:oruphones/features/home/business_logic/cubits/StickButtonsCubit/stick_sort_and_filter_cubit.dart';
 import 'package:oruphones/features/splash_screen/presentation/screens/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:oruphones/firebase_options.dart';
