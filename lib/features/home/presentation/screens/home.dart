@@ -14,6 +14,7 @@ import 'package:oruphones/features/home/presentation/widgets/best_deals.dart';
 import 'package:oruphones/features/home/presentation/widgets/carousel_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/drawer.dart';
 import 'package:oruphones/features/home/presentation/widgets/faqs.dart';
+import 'package:oruphones/features/home/presentation/widgets/get_notified.dart';
 import 'package:oruphones/features/home/presentation/widgets/on_your_mind_section.dart';
 import 'package:oruphones/features/home/presentation/widgets/sort_filter_button.dart';
 import 'package:oruphones/features/home/presentation/widgets/textfield.dart';
@@ -256,20 +257,32 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ];
           },
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ListView(controller: _scrollController, padding: EdgeInsets.symmetric(vertical: 10), children: [
-              CarouselSection(),
-              OnYourMindSection(),
-              TopBrandsSection(
-                key: _targetKey,
+          body: ListView(controller: _scrollController, padding: EdgeInsets.symmetric(vertical: 10), children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  CarouselSection(),
+                  OnYourMindSection(),
+                  TopBrandsSection(
+                    key: _targetKey,
+                  ),
+                  BestDeals(
+                    userModel: widget.userModel,
+                  ),
+                  FaqsSection(),
+                ],
               ),
-              BestDeals(
-                userModel: widget.userModel,
-              ),
-              FaqsSection(),
-            ]),
-          ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            GetNotifiedSection(),
+            Image.asset(
+              'lib/assets/images/downloadApp.png',
+              width: double.infinity,
+            )
+          ]),
         ),
       ),
       drawer: DrawerSection(
