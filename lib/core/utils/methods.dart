@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:oruphones/core/constants/enums.dart';
+import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/database/database_queries.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
@@ -14,18 +16,26 @@ class Methods {
   BackendRepo backendRepo = BackendRepo();
 
   void loginButton(BuildContext context, TextEditingController controller, bool checkBoxValue, {void Function()? onTap}) {
-    print(checkBoxValue);
     if (checkBoxValue) {
       String phoneNumber = controller.value.text;
-      createOtp(phoneNumber);
-      print("hello");
-      if (onTap != null) {
-        onTap();
+      if (phoneNumber.length == 10) {
+        createOtp(phoneNumber);
+        if (onTap != null) {
+          onTap();
+        } else {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => OtpScreen(
+                    phoneNumber: phoneNumber,
+                  )));
+        }
       } else {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => OtpScreen(
-                  phoneNumber: phoneNumber,
-                )));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          'Invalid phone number',
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+          ),
+        )));
       }
     }
   }
@@ -42,7 +52,6 @@ class Methods {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final cookie = prefs.getString('cookie');
     final response = await backendRepo.callGetMethod("isLoggedIn", cookie: cookie);
-    print(response);
     if (response.statusCode == 200) {
       final data = response.data;
       if (data['isLoggedIn'] as bool) {
@@ -94,8 +103,6 @@ class Methods {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('csrfToken') ?? "";
     final cookie = prefs.getString('cookie') ?? "";
-    print(token);
-    print(cookie);
     final response = await backendRepo.callUserPostMethod(
         'update',
         {
@@ -146,6 +153,9 @@ class Methods {
         product.liked = user.favListings.contains(product.listingId);
       }
     }
+    for (int i = 6; i < products.length; i += 7) {
+      products.insert(i, dummyProduct);
+    }
     return products;
   }
 
@@ -182,7 +192,6 @@ class Methods {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('csrfToken') ?? "";
     final cookie = prefs.getString('cookie') ?? "";
-    print(product.liked);
     await backendRepo.callUserPostMethod(
         'favs',
         {

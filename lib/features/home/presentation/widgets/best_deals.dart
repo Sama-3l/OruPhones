@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
-import 'package:oruphones/core/database/models/location_model.dart';
+import 'package:oruphones/core/constants/home_page_constants.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
@@ -93,37 +93,7 @@ class _BestDealsState extends State<BestDeals> {
                 ),
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return ProductCard(
-                      userModel: widget.userModel,
-                      product: ProductModel(
-                        id: "",
-                        deviceCondition: "New",
-                        listedBy: "",
-                        deviceStorage: "",
-                        images: [],
-                        defaultImage: "",
-                        listingState: "",
-                        listingLocation: "",
-                        listingLocality: "",
-                        listingPrice: "",
-                        make: "",
-                        marketingName: "",
-                        openForNegotiation: true,
-                        discountPercentage: 0,
-                        verified: true,
-                        listingId: "",
-                        status: "",
-                        verifiedDate: "",
-                        listingDate: "",
-                        deviceRam: "",
-                        warranty: "",
-                        imagePath: "",
-                        createdAt: DateTime.now(),
-                        updatedAt: DateTime.now(),
-                        location: LocationModel(id: "", type: "Point", coordinates: []),
-                        originalPrice: 0,
-                        discountedPrice: 0,
-                      ));
+                  return ProductCard(userModel: widget.userModel, product: dummyProduct);
                 },
               );
             } else if (snapshot.hasError) {
@@ -144,10 +114,15 @@ class _BestDealsState extends State<BestDeals> {
                 ),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
-                  return ProductCard(
-                    product: items[index],
-                    userModel: widget.userModel,
-                  );
+                  return items[index].id == ""
+                      ? Image.asset(
+                          'lib/assets/images/sell.png',
+                          width: double.infinity,
+                        )
+                      : ProductCard(
+                          product: items[index],
+                          userModel: widget.userModel,
+                        );
                 },
               );
             }

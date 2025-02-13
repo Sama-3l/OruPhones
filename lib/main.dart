@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/checkBoxCubit/check_box_cubit.dart';
-import 'package:oruphones/features/auth/business_logic/cubits/cubit/bottom_sheet_page_cubit.dart';
+import 'package:oruphones/features/auth/business_logic/cubits/BottomSheetCubit/bottom_sheet_page_cubit.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/otpUpdateCubit/otp_update_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/CarouselScrollCubit/carouselscroll_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/LikeProduct/like_product_cubit.dart';

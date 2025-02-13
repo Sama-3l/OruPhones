@@ -1,4 +1,6 @@
 import 'package:oruphones/assets/svgs/svg.dart';
+import 'package:oruphones/core/database/models/location_model.dart';
+import 'package:oruphones/core/database/models/product_model.dart';
 
 const options = [
   "Buy Used Phones",
@@ -80,3 +82,33 @@ final List<Map<String, dynamic>> drawerOptions = [
     "loggedInText": "Return Policy",
   },
 ];
+
+final dummyProduct = ProductModel(
+  id: "",
+  deviceCondition: "New",
+  listedBy: "",
+  deviceStorage: "",
+  images: [],
+  defaultImage: "",
+  listingState: "",
+  listingLocation: "",
+  listingLocality: "",
+  listingPrice: "",
+  make: "",
+  marketingName: "",
+  openForNegotiation: true,
+  discountPercentage: 0,
+  verified: true,
+  listingId: "",
+  status: "",
+  verifiedDate: "",
+  listingDate: "",
+  deviceRam: "",
+  warranty: "",
+  imagePath: "",
+  createdAt: DateTime.now(),
+  updatedAt: DateTime.now(),
+  location: LocationModel(id: "", type: "Point", coordinates: []),
+  originalPrice: 0,
+  discountedPrice: 0,
+);

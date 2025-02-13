@@ -8,7 +8,7 @@ import 'package:oruphones/core/database/models/user_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/checkBoxCubit/check_box_cubit.dart';
-import 'package:oruphones/features/auth/business_logic/cubits/cubit/bottom_sheet_page_cubit.dart';
+import 'package:oruphones/features/auth/business_logic/cubits/BottomSheetCubit/bottom_sheet_page_cubit.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/otpUpdateCubit/otp_update_cubit.dart';
 import 'package:oruphones/features/auth/presentation/widgets/input_field.dart';
 import 'package:oruphones/features/auth/presentation/widgets/login_button.dart';

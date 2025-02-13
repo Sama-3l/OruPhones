@@ -75,7 +75,7 @@ class DrawerSection extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          'Joined ${DateFormat('MMM dd, YYYY').format(user!.createdDate)}',
+                                          'Joined ${DateFormat('MMM dd, y').format(user!.createdDate)}',
                                           style: GoogleFonts.poppins(
                                             fontSize: 12,
                                             color: LightColors.indicatorGrey,
