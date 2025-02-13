@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
-import 'package:oruphones/features/home/business_logic/cubits/cubit/expand_faq_cubit.dart';
+import 'package:oruphones/features/home/business_logic/cubits/ExpandFaqCubit/expand_faq_cubit.dart';
 
 class FaqPanel extends StatefulWidget {
   final String question;

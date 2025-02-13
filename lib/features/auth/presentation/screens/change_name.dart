@@ -74,25 +74,13 @@ class ChangeNameScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 100),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Please Tell Us Your Name",
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      color: LightColors.black,
-                    ),
-                  ),
-                  LoginInputField(
-                    padding: EdgeInsets.only(top: 4),
-                    textEditingController: controller,
-                    hintText: "Name",
-                    textInputType: TextInputType.text,
-                    maxLength: 50,
-                  ),
-                ],
+              child: LoginInputField(
+                padding: EdgeInsets.only(top: 4),
+                textEditingController: controller,
+                title: "Please Tell Us Your Name",
+                hintText: "Name",
+                textInputType: TextInputType.text,
+                maxLength: 50,
               ),
             ),
             ElevatedButton(

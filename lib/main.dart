@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/checkBoxCubit/check_box_cubit.dart';
+import 'package:oruphones/features/auth/business_logic/cubits/cubit/bottom_sheet_page_cubit.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/otpUpdateCubit/otp_update_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/CarouselScrollCubit/carouselscroll_cubit.dart';
 import 'package:oruphones/features/home/business_logic/cubits/LikeProduct/like_product_cubit.dart';
-import 'package:oruphones/features/home/business_logic/cubits/cubit/expand_faq_cubit.dart';
+import 'package:oruphones/features/home/business_logic/cubits/ExpandFaqCubit/expand_faq_cubit.dart';
 import 'package:oruphones/features/splash_screen/presentation/screens/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => OtpUpdateCubit()),
           BlocProvider(create: (context) => LikeProductCubit()),
           BlocProvider(create: (context) => ExpandFaqCubit()),
+          BlocProvider(create: (context) => BottomSheetPageCubit()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

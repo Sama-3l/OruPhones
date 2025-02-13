@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
 import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/auth/business_logic/cubits/checkBoxCubit/check_box_cubit.dart';
 import 'package:oruphones/features/auth/presentation/widgets/input_field.dart';
+import 'package:oruphones/features/auth/presentation/widgets/login_button.dart';
+import 'package:oruphones/features/auth/presentation/widgets/terms_and_cond.dart';
 import 'package:oruphones/features/home/presentation/screens/home.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -72,99 +72,20 @@ class LoginScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 100),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Enter Your Phone Number",
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      color: LightColors.black,
-                    ),
-                  ),
-                  LoginInputField(
-                    padding: EdgeInsets.only(top: 4),
-                    textEditingController: controller,
-                  ),
-                ],
+              child: LoginInputField(
+                prefixIcon: true,
+                title: "Enter your Phone Number",
+                padding: EdgeInsets.only(top: 4),
+                textEditingController: controller,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: Row(
-                children: [
-                  BlocBuilder<CheckBoxCubit, CheckBoxState>(
-                    builder: (context, state) {
-                      return SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: Checkbox(
-                          value: acceptTermsAndConditions,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                color: LightColors.indicatorGrey,
-                              ),
-                              borderRadius: BorderRadius.circular(4)),
-                          onChanged: (newValue) {
-                            acceptTermsAndConditions = newValue;
-                            context.read<CheckBoxCubit>().onUpdate();
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
-                    child: Text.rich(TextSpan(text: '', children: <InlineSpan>[
-                      TextSpan(
-                        text: 'Accept ',
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          color: LightColors.black,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'terms and conditions',
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          color: LightColors.blue,
-                          decoration: TextDecoration.underline,
-                        ),
-                      )
-                    ])),
-                  ),
-                ],
-              ),
-            ),
-            ElevatedButton(
-                onPressed: () => func.loginButton(context, controller, acceptTermsAndConditions!),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: LightColors.blue,
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    )),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "Next",
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        color: LightColors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Iconify(
-                        arrow,
-                        size: 24,
-                      ),
-                    )
-                  ],
-                ))
+            TermsAndCondSection(
+                acceptTermsAndConditions: acceptTermsAndConditions,
+                onTap: (value) {
+                  acceptTermsAndConditions = value;
+                  context.read<CheckBoxCubit>().onUpdate();
+                }),
+            LoginButton(controller: controller, acceptTermsAndConditions: acceptTermsAndConditions),
           ],
         ),
       ),

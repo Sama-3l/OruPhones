@@ -8,12 +8,14 @@ class LoginInputField extends StatelessWidget {
     super.key,
     this.textEditingController,
     required this.padding,
+    required this.title,
     this.hintText = "Mobile Number",
     this.prefixIcon = false,
     this.textInputType = TextInputType.number,
     this.maxLength = 10,
   });
 
+  final String title;
   final TextEditingController? textEditingController;
   final EdgeInsets padding;
   final String hintText;
@@ -23,61 +25,74 @@ class LoginInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: TextField(
-        controller: textEditingController,
-        style: GoogleFonts.poppins(
-          fontSize: 16,
-          color: LightColors.black,
-          letterSpacing: -0.41,
-        ),
-        keyboardType: TextInputType.number,
-        maxLength: maxLength,
-        maxLengthEnforcement: MaxLengthEnforcement.truncateAfterCompositionEnds,
-        decoration: InputDecoration(
-          hintText: hintText,
-          counterText: "",
-          hintStyle: GoogleFonts.poppins(
-            fontSize: 16,
-            color: LightColors.placeholder,
-            letterSpacing: -0.41,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            color: LightColors.black,
           ),
-          isDense: true,
-          filled: true,
-          fillColor: LightColors.white,
-          contentPadding: EdgeInsets.only(top: 16, bottom: 16),
-          prefixIconConstraints: BoxConstraints(maxHeight: 20),
-          prefixIcon: prefixIcon
-              ? Padding(
-                  padding: EdgeInsets.only(left: 10, right: 7),
-                  child: Text(
-                    "+91",
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      color: LightColors.darkGrey,
-                      letterSpacing: -0.41,
+        ),
+        Padding(
+          padding: padding,
+          child: TextField(
+            controller: textEditingController,
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+              color: LightColors.black,
+              letterSpacing: -0.41,
+            ),
+            keyboardType: TextInputType.number,
+            maxLength: maxLength,
+            maxLengthEnforcement: MaxLengthEnforcement.truncateAfterCompositionEnds,
+            decoration: InputDecoration(
+              hintText: hintText,
+              counterText: "",
+              hintStyle: GoogleFonts.poppins(
+                fontSize: 16,
+                color: LightColors.placeholder,
+                letterSpacing: -0.41,
+              ),
+              isDense: true,
+              filled: true,
+              fillColor: LightColors.white,
+              contentPadding: EdgeInsets.only(top: 16, bottom: 16),
+              prefixIconConstraints: BoxConstraints(maxHeight: 20),
+              prefixIcon: prefixIcon
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, right: 7),
+                      child: Text(
+                        "+91",
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: LightColors.darkGrey,
+                          letterSpacing: -0.41,
+                        ),
+                      ))
+                  : SizedBox(
+                      width: 16,
                     ),
-                  ))
-              : SizedBox(
-                  width: 16,
-                ),
-          // filled: true,
-          // fillColor: LightColors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
-            borderSide: BorderSide(color: LightColors.placeholder, width: 1.0), // Increased width
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
-            borderSide: BorderSide(color: LightColors.placeholder, width: 1.0), // For normal state
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
-            borderSide: BorderSide(color: LightColors.placeholder, width: 1.5), // For focused state
+              // filled: true,
+              // fillColor: LightColors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),
+                borderSide: BorderSide(color: LightColors.placeholder, width: 1.0), // Increased width
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),
+                borderSide: BorderSide(color: LightColors.placeholder, width: 1.0), // For normal state
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),
+                borderSide: BorderSide(color: LightColors.placeholder, width: 1.5), // For focused state
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

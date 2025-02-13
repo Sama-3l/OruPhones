@@ -7,12 +7,14 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:oruphones/assets/svgs/svg.dart';
 import 'package:oruphones/core/database/models/product_model.dart';
 import 'package:oruphones/core/themes/app_colors.dart';
+import 'package:oruphones/core/utils/methods.dart';
 import 'package:oruphones/features/home/business_logic/cubits/LikeProduct/like_product_cubit.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, required this.product});
+  ProductCard({super.key, required this.product});
 
   final ProductModel product;
+  final Methods func = Methods();
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +107,7 @@ class ProductCard extends StatelessWidget {
                             onTap: () {
                               product.liked = !product.liked;
                               context.read<LikeProductCubit>().onPressed(product.liked);
+                              func.showLoginBottomSheet(context);
                             },
                             child: Icon(
                               product.liked ? Icons.favorite : Icons.favorite_border,
