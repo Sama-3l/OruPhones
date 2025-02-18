@@ -64,7 +64,7 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json["_id"],
+      id: json["_id"] ?? "",
       deviceCondition: json["deviceCondition"],
       listedBy: json["listedBy"],
       deviceStorage: json["deviceStorage"],
@@ -77,11 +77,11 @@ class ProductModel {
       make: json["make"],
       marketingName: json["marketingName"],
       openForNegotiation: json["openForNegotiation"],
-      discountPercentage: json["discountPercentage"] == null ? 0.0 : json["discountPercentage"] as double,
+      discountPercentage: json["discountPercentage"] ?? 0.0,
       verified: json["verified"] as bool,
       listingId: json["listingId"],
       status: json["status"],
-      verifiedDate: json["verifiedDate"],
+      verifiedDate: json["verifiedDate"] ?? "",
       listingDate: json["listingDate"],
       deviceRam: json["deviceRam"],
       warranty: json["warranty"],
